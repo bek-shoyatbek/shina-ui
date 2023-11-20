@@ -27,7 +27,9 @@ export default function Products() {
   useEffect(() => {
     async function getProducts() {
       try {
-        const jsonData = (await axios.get(`${API_URL}/api/products`)).data;
+        const jsonData = (
+          await axios.get(`${API_URL}/api/products`, { timeout: 30000 })
+        ).data;
         setCategories(
           Array.from(
             new Set(jsonData.map((product) => product.full_model.trim()))

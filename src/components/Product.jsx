@@ -29,8 +29,11 @@ export default function Product() {
 
   useEffect(() => {
     async function getProduct() {
-      const jsonData = (await axios.get(`${API_URL}/api/product/${productId}`))
-        .data;
+      const jsonData = (
+        await axios.get(`${API_URL}/api/product/${productId}`, {
+          timeout: 30000,
+        })
+      ).data;
       setProduct(jsonData);
       setPrice(parseFloat(jsonData.price_usd.trim()).toFixed(2));
     }
@@ -41,7 +44,9 @@ export default function Product() {
   useEffect(() => {
     async function getCurrency() {
       try {
-        const jsonData = (await axios.get(`${API_URL}/api/currency`)).data;
+        const jsonData = (
+          await axios.get(`${API_URL}/api/currency`, { timeout: 30000 })
+        ).data;
         setCurrency(jsonData.data.val);
         setSolidPrice(parseFloat(product.price_usd) * parseFloat(currency));
       } catch (err) {
@@ -50,7 +55,6 @@ export default function Product() {
     }
     getCurrency();
   }, [currency, product]);
-  
 
   const getUserContact = async () => {
     const result = await Swal.fire({
@@ -92,7 +96,8 @@ export default function Product() {
   async function orderProduct(productId) {
     try {
       const response = await axios.get(
-        `${API_URL}/api/order/${productId}?userContact=${userContact}&username=${username}&creditType=${creditType}`
+        `${API_URL}/api/order/${productId}?userContact=${userContact}&username=${username}&creditType=${creditType}`,
+        { timeout: 30000 }
       );
 
       if (response.ok) {
