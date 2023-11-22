@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import "./Product.css";
 import axios from "axios";
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Product() {
@@ -77,7 +78,8 @@ export default function Product() {
     };
   };
 
-  const submitOrder = async () => {
+  const submitOrder = async (e) => {
+    e.preventDefault();
     if (username === "undefined" || userContact === "undefined") {
       const userInfo = await getUserContact();
       username = userInfo.username;
@@ -142,6 +144,7 @@ export default function Product() {
                   name="size"
                   value="1"
                   onClick={(e) => {
+                    e.preventDefault();
                     setActiveBtn(e.target.value);
                     let oldPrice = parseFloat(price);
                     let newPrice = oldPrice * parseFloat(currency);
@@ -156,6 +159,7 @@ export default function Product() {
                   name="size"
                   value="3"
                   onClick={(e) => {
+                    e.preventDefault();
                     setActiveBtn(e.target.value);
                     let percent = parseFloat(product.percent_3m);
                     let oldPrice = parseFloat(price);
@@ -172,6 +176,7 @@ export default function Product() {
                   name="size"
                   value="6"
                   onClick={(e) => {
+                    e.preventDefault();
                     setActiveBtn(e.target.value);
                     let percent = parseFloat(product.percent_6m);
                     let oldPrice = parseFloat(price);
@@ -188,6 +193,7 @@ export default function Product() {
                   name="size"
                   value="9"
                   onClick={(e) => {
+                    e.preventDefault();
                     setActiveBtn(e.target.value);
                     let percent = parseFloat(product.percent_9m);
                     let oldPrice = parseFloat(price);

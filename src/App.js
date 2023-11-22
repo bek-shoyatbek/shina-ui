@@ -20,8 +20,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path={'/'} element={<Products />} />
-          <Route path={'/wheel'} element={<Product />} />
+          <Route key={"products"} path={'/'} element={<Products />} />
+          <Route key={"product"} path={'/wheel'} element={<Product />} />
         </Routes>
       </BrowserRouter>
     </>

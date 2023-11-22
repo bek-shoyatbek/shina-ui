@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
+
 import "./Products.css";
 import axios from "axios";
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Products() {
@@ -105,7 +107,10 @@ export default function Products() {
           <select
             className="filter  category-filter"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => {
+              e.preventDefault();
+              setCategory(e.target.value);
+            }}
           >
             <option value="all">Shina turlari</option>
             {categories.map((category) => (
@@ -117,7 +122,10 @@ export default function Products() {
           <select
             className="filter  size-filter"
             value={selectedSize}
-            onChange={(e) => setSelectedSize(e.target.value)}
+            onChange={(e) => {
+              e.preventDefault();
+              setSelectedSize(e.target.value);
+            }}
           >
             <option value="all">O'lcham tanlash</option>
             {sizes.map((size) => (
