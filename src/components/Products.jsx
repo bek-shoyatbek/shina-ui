@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
-
 
 import "./Products.css";
 import axios from "axios";
@@ -15,6 +14,29 @@ export default function Products() {
 
   localStorage.setItem("username", username);
   localStorage.setItem("userContact", userContact);
+
+  // optimize slow rendering
+
+  const [page, setPage] = useState(1);
+
+  const loader = useRef(null);
+
+  const handleObserver = useCallback((entries) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setPage((prev) => prev + 1);
+    }
+  }, []);
+
+  useEffect(() => {
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0,
+    };
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (loader.current) observer.observe(loader.current);
+  }, [handleObserver]);
 
   const [categories, setCategories] = useState([]);
 
@@ -30,21 +52,23 @@ export default function Products() {
     async function getProducts() {
       try {
         const jsonData = (
-          await axios.get(`${API_URL}/api/products`, { timeout: 30000 })
+          await axios.get(`${API_URL}/api/products`, {
+            timeout: 30000,
+          })
         ).data;
         setCategories(
           Array.from(
             new Set(jsonData.map((product) => product.full_model.trim()))
           )
         );
-        setProducts(jsonData);
+        setProducts((prev) => [...prev, ...jsonData]);
         setSizes(getSizeOfProducts(products));
       } catch (err) {
         console.log(err);
       }
     }
     getProducts();
-  }, [products]);
+  }, [products, page]);
 
   let filteredProducts = [];
   if (category === "all") {
@@ -93,7 +117,7 @@ export default function Products() {
     } else {
       return (
         <div className="notFound">
-          <h1>Mahsulot topilmadi!</h1>
+          <h1>Mahsulotlar yuklanmoqda...</h1>
         </div>
       );
     }
@@ -103,6 +127,7 @@ export default function Products() {
     <>
       <div className="container">
         <RenderProduct products={filteredProducts} />
+        <div ref={loader} />
         <div className="navbar">
           <select
             className="filter  category-filter"

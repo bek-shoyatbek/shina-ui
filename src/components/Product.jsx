@@ -46,7 +46,9 @@ export default function Product() {
     async function getCurrency() {
       try {
         const jsonData = (
-          await axios.get(`${API_URL}/api/currency`, { timeout: 30000 })
+          await axios.get(`${API_URL}/api/currency`, {
+            timeout: 30000,
+          })
         ).data;
         setCurrency(jsonData.data.val);
         setSolidPrice(parseFloat(product.price_usd) * parseFloat(currency));
