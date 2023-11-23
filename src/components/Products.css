@@ -102,6 +102,11 @@ body {
   color: #fff;
 }
 
+.container .card .contentBx .color {
+  color: #000000;
+  border: 5px;
+  background-color: #ffffff;
+}
 .container .card .contentBx .size,
 .container .card .contentBx .color {
   display: flex;
@@ -246,5 +251,5 @@ body {
 .notFound h1 {
   text-align: center;
   font-size: 1.2em;
-  color:  rgb(22, 166, 22);
+  color: rgb(22, 166, 22);
 }

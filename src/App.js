@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Product from './components/Product';
 import { useEffect } from 'react';
 import Products from './components/Products';
-import eruda from "eruda";
+// import eruda from "eruda";
 
 
 const tele = window.Telegram.WebApp;
@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     tele.ready();
     tele.expand();
-    eruda.init();
+    // eruda.init();
   })
 
   return (

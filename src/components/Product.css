@@ -37,12 +37,14 @@
 
 .detail_item {
   padding: 5px 0;
+  color: #191212;
+  background-color: #fff;
   border-bottom: 0.5px solid #191212;
 }
 
-.detail_item:last-child {
+/* .detail_item:last-child {
   border-bottom: none;
-}
+} */
 
 .detail_item::before {
   content: "";
@@ -52,7 +54,6 @@
 .orderBtn {
   bottom: 10px;
   background: rgb(22, 166, 22);
-
   color: #fff;
   text-transform: uppercase;
   padding: 10px;
@@ -94,7 +95,8 @@ a:hover {
   padding: 5px 10px;
   border: none;
   border-radius: 4px;
-  background: #eee;
+  background: #474040;
+  color: #fff;
   cursor: pointer;
 }
 
