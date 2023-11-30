@@ -12,8 +12,14 @@ export default function Products() {
   const location = useLocation();
   const { username, userContact } = queryString.parse(location.search);
 
-  localStorage.setItem("username", username);
-  localStorage.setItem("userContact", userContact);
+  localStorage.setItem(
+    "username",
+    username || localStorage.getItem("username")
+  );
+  localStorage.setItem(
+    "userContact",
+    userContact || localStorage.getItem("userContact")
+  );
 
   // optimize slow rendering
 
@@ -61,7 +67,10 @@ export default function Products() {
             new Set(jsonData.map((product) => product.full_model.trim()))
           )
         );
-        setProducts((prev) => [...prev, ...jsonData]);
+        const uniqueProducts = jsonData.filter(
+          (product) => !products.some((p) => p._id === product._id)
+        );
+        setProducts((prev) => [...prev, ...uniqueProducts]);
         setSizes(getSizeOfProducts(products));
       } catch (err) {
         console.log(err);
