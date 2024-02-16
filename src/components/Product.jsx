@@ -11,10 +11,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Product() {
   const location = useLocation();
-  const { productId } = queryString.parse(location.search);
-
-  let username = localStorage.getItem("username");
-  let userContact = localStorage.getItem("userContact");
+  let { productId, username, userContact } = queryString.parse(location.search);
 
   const [product, setProduct] = useState();
 
@@ -84,11 +81,11 @@ export default function Product() {
     e.preventDefault();
     if (!username || !userContact) {
       const userInfo = await getUserContact();
-      username = userInfo.username;
-      userContact = userInfo.phoneNumber;
+      if (userInfo) {
+        username = userInfo.username;
+        userContact = userInfo.phoneNumber;
+      }
       if (!username || !userContact) return;
-      localStorage.setItem("username", username);
-      localStorage.setItem("userContact", userContact);
     }
     if (username && userContact) {
       await orderProduct(productId);

@@ -12,15 +12,6 @@ export default function Products() {
   const location = useLocation();
   const { username, userContact } = queryString.parse(location.search);
 
-  localStorage.setItem(
-    "username",
-    username || localStorage.getItem("username")
-  );
-  localStorage.setItem(
-    "userContact",
-    userContact || localStorage.getItem("userContact")
-  );
-
   // optimize slow rendering
 
   const [page, setPage] = useState(1);
@@ -119,7 +110,12 @@ export default function Products() {
             </div>
             <div className="color"></div>
             <p className="color price" style={{ marginTop: "30px" }}></p>
-            <Link to={`/wheel?productId=${product._id}`}> Sotib olish </Link>
+            <Link
+              to={`/wheel?productId=${product._id}&username=${username}&userContact=${userContact}`}
+            >
+              {" "}
+              Sotib olish{" "}
+            </Link>
           </div>
         </div>
       ));
