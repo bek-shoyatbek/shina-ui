@@ -13,6 +13,8 @@ export default function Product() {
   const location = useLocation();
   let { productId, username, userContact } = queryString.parse(location.search);
 
+  console.log(productId, username, userContact);
+
   const [product, setProduct] = useState();
 
   const [creditType, setCreditType] = useState(1);
@@ -79,7 +81,10 @@ export default function Product() {
 
   const submitOrder = async (e) => {
     e.preventDefault();
-    if (!username || !userContact) {
+
+    console.log("Submit order");
+    console.log(username, userContact);
+    if (username === "undefined" || userContact === "undefined") {
       const userInfo = await getUserContact();
       if (userInfo) {
         username = userInfo.username;
