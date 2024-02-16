@@ -84,7 +84,12 @@ export default function Product() {
 
     console.log("Submit order");
     console.log(username, userContact);
-    if (username === "undefined" || userContact === "undefined") {
+    if (
+      username === "undefined" ||
+      username === "null" ||
+      userContact === "undefined" ||
+      userContact === "null"
+    ) {
       const userInfo = await getUserContact();
       if (userInfo) {
         username = userInfo.username;
