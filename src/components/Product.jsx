@@ -82,10 +82,13 @@ export default function Product() {
 
   const submitOrder = async (e) => {
     e.preventDefault();
-    if (username === "undefined" || userContact === "undefined") {
+    if (!username || !userContact) {
       const userInfo = await getUserContact();
       username = userInfo.username;
       userContact = userInfo.phoneNumber;
+      if (!username || !userContact) return;
+      localStorage.setItem("username", username);
+      localStorage.setItem("userContact", userContact);
     }
     if (username && userContact) {
       await orderProduct(productId);
