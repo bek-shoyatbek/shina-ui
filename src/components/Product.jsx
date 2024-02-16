@@ -86,9 +86,9 @@ export default function Product() {
     console.log(username, userContact);
     if (
       username === "undefined" ||
-      username === "null" ||
+      !username ||
       userContact === "undefined" ||
-      userContact === "null"
+      !userContact
     ) {
       const userInfo = await getUserContact();
       if (userInfo) {
