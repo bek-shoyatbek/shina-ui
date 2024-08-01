@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import Swal from "sweetalert2";
-
-import "./Product.css";
 import axios from "axios";
+import "./Product.css";
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 const API_URL = process.env.REACT_APP_API_URL;
@@ -82,8 +81,6 @@ export default function Product() {
   const submitOrder = async (e) => {
     e.preventDefault();
 
-    console.log("Submit order");
-    console.log(username, userContact);
     if (
       username === "undefined" ||
       !username ||
