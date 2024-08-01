@@ -170,11 +170,8 @@ export default function Product() {
                   onClick={(e) => {
                     e.preventDefault();
                     setActiveBtn(e.target.value);
-                    let percent = parseFloat(product.percent_3m);
-                    let oldPrice = parseFloat(price);
-                    let newPrice = oldPrice + (percent * oldPrice) / 100;
-                    newPrice = (newPrice * parseFloat(currency)) / 3;
-                    setSolidPrice(newPrice);
+                    let priceFor3Months = parseFloat(product.percent_3m);
+                    setSolidPrice(priceFor3Months * parseFloat(currency));
                     setCreditType(e.target.value);
                   }}
                 >
@@ -187,11 +184,8 @@ export default function Product() {
                   onClick={(e) => {
                     e.preventDefault();
                     setActiveBtn(e.target.value);
-                    let percent = parseFloat(product.percent_6m);
-                    let oldPrice = parseFloat(price);
-                    let newPrice = oldPrice + (percent * oldPrice) / 100;
-                    newPrice = (newPrice * parseFloat(currency)) / 3;
-                    setSolidPrice(newPrice);
+                    let priceFor6Months = parseFloat(product.percent_6m);
+                    setSolidPrice(priceFor6Months * parseFloat(currency));
                     setCreditType(e.target.value);
                   }}
                 >
@@ -204,11 +198,8 @@ export default function Product() {
                   onClick={(e) => {
                     e.preventDefault();
                     setActiveBtn(e.target.value);
-                    let percent = parseFloat(product.percent_9m);
-                    let oldPrice = parseFloat(price);
-                    let newPrice = oldPrice + (percent * oldPrice) / 100;
-                    newPrice = (newPrice * parseFloat(currency)) / 3;
-                    setSolidPrice(newPrice);
+                    let priceFor9Months = parseFloat(product.percent_9m);
+                    setSolidPrice(priceFor9Months * parseFloat(currency));
                     setCreditType(e.target.value);
                   }}
                 >
